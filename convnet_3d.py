@@ -10,31 +10,14 @@ Stacked 3D-CAE for Alzheimer
 __author__ = 'ehsanh'
 
 import numpy as np
-import argparse
-import os
-from PIL import Image
 import pickle
-import cPickle
-import random
-import sys
-import time
 import maxpool3d
 import theano
 import theano.tensor as T
 from theano.tensor import nnet
 from theano.tensor.signal import downsample
-import ipdb
-# T = theano.tensor
-# import theano.tensor.nnet.conv3d2d
-import myconv3d2d_v2
+import conv3d2d
 from itertools import izip
-from sklearn import preprocessing
-import scipy.io as sio
-import random
-from operator import eq
-from theano.tensor.extra_ops import repeat
-from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, classification_report, \
-    roc_curve, auc, roc_auc_score
 
 FLOAT_PRECISION = np.float32
 
@@ -62,11 +45,8 @@ def adadelta_updates(parameters, gradients, rho, eps):
     return gradient_sq_updates + deltas_sq_updates + parameters_updates
     # return parameters_updates
 
+
 class ConvolutionLayer3D(object):
-    # ACT_TANH = 't'
-    # ACT_SIGMOID = 's'
-    # ACT_ReLu = 'r'
-    # ACT_SoftPlus = 'p'
 
     def __init__(self, rng, input, signal_shape, filter_shape, poolsize=(2, 2, 2), stride=None, if_pool=False, if_hidden_pool=False,
                  act=None,
@@ -111,23 +91,8 @@ class ConvolutionLayer3D(object):
 
             self.b_delta = theano.shared(value=b_values, borrow=True)
 
-        #ipdb.set_trace()
-        # Image padding
-        # padded_out = downsample.max_pool_2d(
-        #         input=input,
-        #         ds=(1,1),
-        #         padding=(filter_shape[-1]-1, filter_shape[-2]-1),
-        #         ignore_border=True)
-        # tmp = padded_out.transpose(0,2,3,4,1)
-        # tmp_padded_out = downsample.max_pool_2d(
-        #         input=tmp,
-        #         ds=(1,1),
-        #         padding=(0, filter_shape[1]-1),
-        #         ignore_border=True)
-        # padded_input = tmp_padded_out
-
         # convolution
-        conv_out = myconv3d2d_v2.conv3d(
+        conv_out = conv3d2d.conv3d(
             signals=input,
             filters=self.W,
             signals_shape=signal_shape,
@@ -174,10 +139,6 @@ class ConvolutionLayer3D(object):
 
         # store parameters of this layer
         self.params = [self.W, self.b]
-
-        #EHA: parameter update- list of 5 previous updates
-        # self.params_update = [5*[self.W_update], 5*[self.b_update]]
-
         self.deltas = [self.W_delta, self.b_delta]
 
     def get_state(self):
@@ -219,11 +180,6 @@ class HiddenLayer(object):
             b_values = np.zeros((n_out,), dtype=theano.config.floatX)
             self.b = theano.shared(value=b_values, name='b', borrow=True)
 
-
-
-        # self.W = W
-        # self.b = b
-
             self.W_delta = theano.shared(
                     np.zeros((n_in, n_out), dtype=theano.config.floatX),
                     borrow=True
@@ -237,7 +193,6 @@ class HiddenLayer(object):
 
         lin_output = T.dot(self.input, self.W) + self.b
 
-        # ipdb.set_trace()
         if activation == 'tanh':
             self.output = T.tanh(lin_output)
         elif activation == 'sigmoid':
@@ -266,13 +221,9 @@ class HiddenLayer(object):
         if self.activation == nnet.sigmoid:
             W_values *= 4
 
-        # self.W = theano.shared(value=W_values, name='W', borrow=True)
         b_values = np.zeros((self.n_out,), dtype=theano.config.floatX)
-        # self.b = theano.shared(value=b_values, name='b', borrow=True)
         self.W.set_value(W_values, borrow=True)
         self.b.set_value(b_values, borrow=True)
-
-
 
 
 class softmaxLayer(object):
@@ -351,12 +302,12 @@ class softmaxLayer(object):
         self.W.set_value(state[0], borrow=True)
         self.b.set_value(state[1], borrow=True)
 
+
 class CAE3d(object):
     def __init__(self, signal_shape, filter_shape, poolsize, activation=None):
         rng = np.random.RandomState(None)
         dtensor5 = T.TensorType('float32', (False,)*5)
         self.inputs = dtensor5(name='inputs')
-        # inputs_padded = dtensor5(name='inputs_padded')
         self.image_shape = signal_shape
         self.batchsize = signal_shape[0]
         self.in_channels   = signal_shape[2]
@@ -391,38 +342,19 @@ class CAE3d(object):
 
         self.hidden_filter_shape = (self.in_channels, self.flt_time, self.flt_channels, self.flt_height,
                                     self.flt_width)
-        # self.hidden_layer_output = repeat(self.hidden_layer.output,
-        #                              repeats=2,
-        #                              axis=1)
-        # self.hidden_layer_output = repeat(self.hidden_layer.output,
-        #                              repeats=2,
-        #                              axis=3)
-        # self.hidden_layer_output = repeat(self.hidden_layer_output,
-        #                              repeats=2,
-        #                              axis=4)
 
         self.recon_layer=ConvolutionLayer3D(rng,
                                  input=self.hidden_layer.output,
                                  signal_shape=self.hidden_image_shape,
                                  filter_shape=self.hidden_filter_shape,
                                  act=activation,
-                                 # tied=hidden_layer,
                                  border_mode='valid')
-
-        # recon_layer.W = hidden_layer.W
-        # recon_layer.W = recon_layer.W.dimshuffle(1,0,2,3)
 
         self.layers = [self.hidden_layer, self.recon_layer]
         self.params = sum([layer.params for layer in self.layers], [])
-        # L=T.sum(T.pow(T.sub(self.recon_layer.output, self.inputs), 2), axis=0)
         L=T.sum(T.pow(T.sub(self.recon_layer.output, self.inputs), 2), axis=(1,2,3,4))
         self.cost = 0.5*T.mean(L)
         self.grads = T.grad(self.cost, self.params)
-
-        # learning_rate = 0.1
-        # updates = [(param_i, param_i-learning_rate*grad_i)
-        #            for param_i, grad_i in zip(self.params, grads)]
-
         self.updates = adadelta_updates(self.params, self.grads, rho=0.95, eps=1e-6)
 
         self.train = theano.function(
@@ -431,13 +363,6 @@ class CAE3d(object):
         updates=self.updates,
         name = "train cae model"
         )
-    # def train(self, self.inputs):
-    #     train = theano.function(
-    #     [self.inputs],
-    #     self.cost,
-    #     updates=self.updates,
-    #     name = "train cae model"
-    #     )
 
         self.activation = maxpool3d.max_pool_3d(
                 input=self.hidden_layer.output.dimshuffle(0,2,1,3,4),
@@ -463,6 +388,7 @@ class CAE3d(object):
             layer.set_state(pickle.load(f))
         f.close()
         print 'cae model loaded from', filename
+
 
 class stacked_CAE3d(object):
     def __init__(self, image_shape, filter_shapes, poolsize, activation_cae=None, activation_final=None, hidden_size=(2000, 500, 200, 20, 3)):
@@ -499,7 +425,7 @@ class stacked_CAE3d(object):
                               (self.in_height-self.flt_height+1)/2,
                               (self.in_width-self.flt_width+1)/2)
 
-        conv2_input=conv1.output.flatten(2)
+        #conv2_input=conv1.output.flatten(2)
         conv2 = ConvolutionLayer3D(rng,
                                    input=conv1.output,
                                    signal_shape=self.conv1_output_shape,
@@ -531,7 +457,7 @@ class stacked_CAE3d(object):
                               (self.conv2_output_shape[3]-self.flt_height+1)/2,
                               (self.conv2_output_shape[4]-self.flt_width+1)/2)
 
-        # for layer in hidden_size:
+        # 4 layers in hidden_size:
         ip1_input=conv3.output.flatten(2)
         ip1 = HiddenLayer(rng,
                           input=ip1_input,
@@ -557,7 +483,7 @@ class stacked_CAE3d(object):
                            n_out=hidden_size[3],
                            activation=activation_final)
 
-        output_layer = softmaxLayer(input=ip2.output,
+        output_layer = softmaxLayer(input=ip4.output,
                                     n_in=hidden_size[1],
                                     n_out=hidden_size[4])
 
@@ -566,11 +492,9 @@ class stacked_CAE3d(object):
                        conv3,
                        ip1,
                        ip2,
-                       # ip3,
-                       # ip4,
                        output_layer]
 
-        # freeze first 3 layers
+        # freeze first 3 conv layers
         self.params = sum([l.params for l in self.layers[3:]], [])
         self.cost = output_layer.negative_log_likelihood(labels)
         self.grads = T.grad(self.cost, self.params)
@@ -591,12 +515,6 @@ class stacked_CAE3d(object):
             outputs=(self.error, self.cost, self.y_pred, self.prob),
             updates=self.updates
         )
-
-        # self.forward = theano.function(
-        #     inputs=[images, labels],
-        #     outputs=(self.error, self.y_pred, self.prob, self.true_prob, self.p_y_given_x,
-        #     self.grads_input)
-        # )
 
         self.forward = theano.function(
             inputs=[images, labels],
