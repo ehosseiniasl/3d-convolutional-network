@@ -6,4 +6,5 @@
 
 
 ###Paper  
+* E. Hosseini-Asl, R. Keynton and A. El-Baz, "Alzheimer's disease diagnostics by adaptation of 3D convolutional network," 2016 IEEE International Conference on Image Processing (ICIP), Phoenix, AZ, USA, 2016, pp. 126-130. 
 * E. Hosseini-Asl, J. M. Zurada, G. Gimel'farb, and A. El-Baz, “Alzheimer's Disease Diagnostics by a  Deeply Supervised Adaptable 3D Convolutional Network”, submitted to  Medical Imaging, IEEE Transactions on.
