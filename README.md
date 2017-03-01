@@ -1,5 +1,5 @@
 # Alzheimer Disease Diagnosis by Deeply Supervised 3D Convolutional Network
-Diagnosing Alzheimer disease from 3D MRI T1 scans from ADNI dataset. The initial results using 3D Convolutional Network is published in ICIP 2016 [[1]](https://arxiv.org/abs/1607.00455). The second model used deeply supervision to boost the performance on all binary and three-way classification of AD/MCI/Normal classes. The results are published on arxiv [[2]]([https://arxiv.org/abs/1607.00556)
+Diagnosing Alzheimer disease from 3D MRI T1 scans from ADNI dataset. The initial results using 3D Convolutional Network is published in ICIP 2016 [[1]](https://arxiv.org/abs/1607.00455). The second model used deeply supervision to boost the performance on all binary and three-way classification of AD/MCI/Normal classes. The results are published on arxiv [[2]](https://arxiv.org/abs/1607.00556)
 
 ### Using Transfer Learning 
 * Pretraining 3D CNN with 3D Convolutional Autoencoder on source domain  
