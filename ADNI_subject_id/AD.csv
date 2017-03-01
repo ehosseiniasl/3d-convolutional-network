@@ -1,0 +1,71 @@
+Subject,Group,Sex,Age,Visit,Modality,Description,Type,Acq Date,Format
+002_S_0619,Patient,M,78,1,MRI,MPR-R; GradWarp; N3,Processed,6/01/2006,NiFTI
+002_S_0816,Patient,M,71,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,8/30/2006,NiFTI
+002_S_0938,Patient,F,83,3,MRI,MPR; GradWarp; B1 Correction; N3,Processed,4/12/2007,NiFTI
+002_S_0955,Patient,F,78,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,10/11/2006,NiFTI
+002_S_1018,Patient,F,71,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,11/29/2006,NiFTI
+002_S_5018,Patient,M,73,22,MRI,MT1; N3m,Processed,11/08/2012,NiFTI
+003_S_1059,Patient,F,85,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,11/09/2006,NiFTI
+003_S_1257,Patient,M,85,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,3/01/2007,NiFTI
+003_S_4136,Patient,M,67,22,MRI,MT1; GradWarp; N3m,Processed,8/10/2011,NiFTI
+003_S_4142,Patient,F,90,22,MRI,MT1; GradWarp; N3m,Processed,8/31/2011,NiFTI
+003_S_4152,Patient,M,61,22,MRI,MT1; GradWarp; N3m,Processed,8/30/2011,NiFTI
+003_S_4373,Patient,F,71,22,MRI,MT1; GradWarp; N3m,Processed,12/15/2011,NiFTI
+003_S_4892,Patient,F,75,22,MRI,MT1; GradWarp; N3m,Processed,8/23/2012,NiFTI
+003_S_5165,Patient,M,79,22,MRI,MT1; GradWarp; N3m,Processed,5/16/2013,NiFTI
+003_S_5187,Patient,F,62,22,MRI,MT1; GradWarp; N3m,Processed,6/07/2013,NiFTI
+005_S_0221,Patient,M,68,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,2/22/2006,NiFTI
+005_S_0814,Patient,F,71,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,8/30/2006,NiFTI
+005_S_0929,Patient,M,82,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,10/02/2006,NiFTI
+005_S_1341,Patient,F,72,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,3/07/2007,NiFTI
+005_S_4707,Patient,M,68,22,MRI,MT1; GradWarp; N3m,Processed,5/15/2012,NiFTI
+005_S_4910,Patient,F,82,22,MRI,MT1; GradWarp; N3m,Processed,9/21/2012,NiFTI
+005_S_5038,Patient,M,82,22,MRI,MT1; GradWarp; N3m,Processed,12/13/2012,NiFTI
+005_S_5119,Patient,F,77,22,MRI,MT1; N3m,Processed,3/28/2013,NiFTI
+006_S_0547,Patient,M,76,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,6/29/2006,NiFTI
+006_S_0653,Patient,F,74,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,7/05/2006,NiFTI
+006_S_4153,Patient,M,79,22,MRI,MT1; N3m,Processed,8/03/2011,NiFTI
+006_S_4192,Patient,M,82,22,MRI,MT1; N3m,Processed,9/27/2011,NiFTI
+006_S_4546,Patient,M,71,22,MRI,MT1; N3m,Processed,3/05/2012,NiFTI
+006_S_4867,Patient,M,75,22,MRI,MT1; N3m,Processed,8/07/2012,NiFTI
+007_S_0316,Patient,M,81,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,3/29/2006,NiFTI
+007_S_1248,Patient,F,80,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,1/25/2007,NiFTI
+007_S_1304,Patient,F,75,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,2/13/2007,NiFTI
+007_S_1339,Patient,F,80,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,2/22/2007,NiFTI
+007_S_4568,Patient,F,71,22,MRI,MT1; GradWarp; N3m,Processed,3/01/2012,NiFTI
+007_S_4911,Patient,M,75,22,MRI,MT1; GradWarp; N3m,Processed,8/30/2012,NiFTI
+007_S_5196,Patient,F,73,22,MRI,MT1; GradWarp; N3m,Processed,6/03/2013,NiFTI
+009_S_1334,Patient,M,64,1,MRI,MPR-R; GradWarp; N3,Processed,3/01/2007,NiFTI
+009_S_1354,Patient,F,59,1,MRI,MPR; GradWarp; N3,Processed,3/06/2007,NiFTI
+009_S_5027,Patient,M,76,22,MRI,MT1; GradWarp; N3m,Processed,11/29/2012,NiFTI
+009_S_5037,Patient,M,67,22,MRI,MT1; GradWarp; N3m,Processed,1/08/2013,NiFTI
+009_S_5224,Patient,M,78,22,MRI,MT1; GradWarp; N3m,Processed,7/11/2013,NiFTI
+009_S_5252,Patient,M,57,22,MRI,MT1; GradWarp; N3m,Processed,7/18/2013,NiFTI
+010_S_0786,Patient,M,75,1,MRI,MPR-R; ; N3,Processed,9/27/2006,NiFTI
+010_S_0829,Patient,F,65,1,MRI,MPR; ; N3,Processed,2/08/2007,NiFTI
+010_S_5163,Patient,M,67,22,MRI,MT1; N3m,Processed,5/29/2013,NiFTI
+011_S_0003,Patient,M,81,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,9/01/2005,NiFTI
+011_S_0010,Patient,F,74,3,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,5/09/2006,NiFTI
+011_S_0053,Patient,M,80,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,11/14/2005,NiFTI
+011_S_0183,Patient,F,72,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,3/03/2006,NiFTI
+011_S_4827,Patient,M,71,22,MRI,MT1; GradWarp; N3m,Processed,7/02/2012,NiFTI
+011_S_4845,Patient,F,68,22,MRI,MT1; GradWarp; N3m,Processed,7/12/2012,NiFTI
+011_S_4906,Patient,F,76,22,MRI,MT1; GradWarp; N3m,Processed,8/13/2012,NiFTI
+011_S_4912,Patient,F,69,22,MRI,MT1; GradWarp; N3m,Processed,8/22/2012,NiFTI
+011_S_4949,Patient,F,78,22,MRI,MT1; GradWarp; N3m,Processed,9/19/2012,NiFTI
+012_S_0689,Patient,M,64,1,MRI,MPR-R; ; N3,Processed,7/05/2006,NiFTI
+012_S_0712,Patient,M,77,1,MRI,MPR; ; N3,Processed,6/29/2006,NiFTI
+012_S_0720,Patient,F,78,1,MRI,MPR; ; N3,Processed,8/09/2006,NiFTI
+012_S_0803,Patient,F,85,1,MRI,MPR; ; N3,Processed,9/22/2006,NiFTI
+013_S_0592,Patient,M,78,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,8/17/2006,NiFTI
+013_S_0699,Patient,M,82,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,8/28/2006,NiFTI
+013_S_0996,Patient,F,91,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,11/06/2006,NiFTI
+013_S_1161,Patient,M,80,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,12/20/2006,NiFTI
+013_S_1205,Patient,M,83,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,1/11/2007,NiFTI
+013_S_5071,Patient,M,76,22,MRI,MT1; N3m,Processed,2/12/2013,NiFTI
+014_S_0328,Patient,M,77,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,3/22/2006,NiFTI
+014_S_0356,Patient,M,80,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,4/05/2006,NiFTI
+014_S_0357,Patient,F,71,1,MRI,MPR-R; GradWarp; B1 Correction; N3,Processed,4/04/2006,NiFTI
+014_S_1095,Patient,F,80,1,MRI,MPR; GradWarp; B1 Correction; N3,Processed,12/03/2006,NiFTI
+014_S_4039,Patient,M,56,22,MRI,MT1; GradWarp; N3m,Processed,6/02/2011,NiFTI
+014_S_4615,Patient,M,87,22,MRI,MT1; GradWarp; N3m,Processed,3/29/2012,NiFTI
